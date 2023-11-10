@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
-void main() {
+import 'core/utils/main_method.dart';
+
+Future<void> main() async {
+  await MainMethods.init();
   runApp(const MyApp());
 }
 
@@ -10,6 +14,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    return ResponsiveSizer(
+        builder: (context, orientation, screenType) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -25,7 +31,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+    );});
   }
 }
 
