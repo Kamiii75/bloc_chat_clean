@@ -1,31 +1,15 @@
 import 'package:get_it/get_it.dart';
+import 'bloc_export.dart';
+
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
   //! Blocs
-  // sl.registerLazySingleton<StylesBloc>(() => StylesBloc(
-  //     getAllStylesUseCase: sl(),
-  //     getAllPlansUseCase: sl(),
-  //     getAllGoalsUseCase: sl()));
-  // sl.registerLazySingleton<WorkoutBloc>(() => WorkoutBloc(
-  //       getAllExercisesUseCase: sl(),
-  //       getAllWorkoutUseCase: sl(),
-  //     ));
-  // sl.registerLazySingleton<StartWorkoutBloc>(() => StartWorkoutBloc(
-  //     getMyWorkoutsUseCase: sl(), getMyExercisesUseCase: sl()));
-  // sl.registerLazySingleton<WelcomeBloc>(() => WelcomeBloc());
-  // sl.registerLazySingleton<ExerciseBloc>(
-  //     () => ExerciseBloc(getAllExercisesUseCase: sl()));
-  // sl.registerLazySingleton<AuthBloc>(() => AuthBloc(
-  //     registerUserUseCase: sl(),
-  //     loginUserUseCase: sl(),
-  //     logoutUseCase: sl(),
-  //     getAllUserUseCase: sl(),
-  //     forgetUseCase: sl(),
-  //     getUserUseCase: sl(),
-  //     updateUserUseCase: sl(),
-  //     deleteUseCase: sl()));
+  sl.registerLazySingleton<WelcomeBloc>(() => WelcomeBloc());
+
+
+  sl.registerLazySingleton<AuthBloc>(() => AuthBloc());
   //
   // //! Bloc States
   // sl.registerLazySingleton<StylesState>(() => StylesState(
@@ -117,9 +101,10 @@ Future<void> init() async {
   // // sl.registerLazySingleton(() => sharedPref);
   //
   // //! Initial Functions
-  // sl<WelcomeBloc>().add(WelcomeInitEvent());
+
+  sl<WelcomeBloc>().add(WelcomeInitEvent());
   // sl<StylesBloc>().add(GetAllStyles());
-  // sl<AuthBloc>().add(AuthInitEvent());
+  sl<AuthBloc>().add(AuthInitEvent());
   // sl<WorkoutBloc>().add(GetAllWorkout());
   // sl<WorkoutBloc>().add(GetAllExercises());
   // sl<ExerciseBloc>().add(GetAllExercisesForType());
