@@ -1,7 +1,6 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.darthive.getx_group_chat_clean">
-   <application
-        android:label="getx_group_chat_clean"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application
+        android:label="quip_sync"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

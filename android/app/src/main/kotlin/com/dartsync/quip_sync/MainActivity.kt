@@ -1,4 +1,4 @@
-package com.darthive.getx_group_chat_clean
+package com.dartsync.quip_sync
 
 import io.flutter.embedding.android.FlutterActivity
 

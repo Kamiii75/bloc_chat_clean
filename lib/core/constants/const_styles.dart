@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:getx_group_chat_clean/core/constants/const_colors.dart';
+import 'package:quip_sync/core/constants/const_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 

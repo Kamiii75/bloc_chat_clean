@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:getx_group_chat_clean/core/constants/const_styles.dart';
+import 'package:quip_sync/core/constants/const_styles.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';

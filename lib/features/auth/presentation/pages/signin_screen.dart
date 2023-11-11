@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:getx_group_chat_clean/core/constants/const_styles.dart';
-import 'package:getx_group_chat_clean/core/widgets/default_buttons.dart';
+import 'package:quip_sync/core/constants/const_styles.dart';
+import 'package:quip_sync/core/widgets/default_buttons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../core/utils/bloc_export.dart';

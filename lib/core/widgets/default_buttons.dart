@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:getx_group_chat_clean/core/constants/const_colors.dart';
-import 'package:getx_group_chat_clean/core/constants/const_styles.dart';
+import 'package:quip_sync/core/constants/const_colors.dart';
+import 'package:quip_sync/core/constants/const_styles.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'animated_scale.dart' as animation_scale;

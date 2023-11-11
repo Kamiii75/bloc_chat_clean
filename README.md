@@ -1,6 +1,6 @@
-# getx_group_chat_clean
+# quip_sync
 
-Group Chat App with GetX and Clean Architecture
+Chat App
 
 ## Getting Started
 

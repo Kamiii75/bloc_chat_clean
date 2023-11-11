@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:getx_group_chat_clean/features/auth/presentation/pages/signin_screen.dart';
-import 'package:getx_group_chat_clean/features/auth/presentation/pages/signup_screen.dart';
+import 'package:quip_sync/features/auth/presentation/pages/signup_screen.dart';
 import 'package:go_router/go_router.dart';
+import 'package:quip_sync/features/auth/presentation/pages/signin_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../core/utils/bloc_export.dart';
 import '../widgets/bg.dart';
