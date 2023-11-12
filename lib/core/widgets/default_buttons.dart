@@ -148,7 +148,7 @@ class _DefaultButtonState extends State<DefaultButton> {
               style: ConstStyles.mainTextStyle.copyWith(
                 letterSpacing: 5.0,
                   color: ConstColors.kPrimaryColor,
-                  fontWeight: FontWeight.bold,fontSize: 20.sp),
+                  fontWeight: FontWeight.bold,fontSize: (ConstStyles.mainTextStyle.fontSize! + 3.sp)),
             ),
           ),
         )

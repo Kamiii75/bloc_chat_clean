@@ -1,28 +1,39 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../../core/utils/bloc_export.dart';
-import '../../../../../core/utils/injections.dart';
+import '../../../../../core/utils/use_case.dart';
 import '../../../domain/entities/model_user.dart';
+import '../../../domain/use_cases/auth_use_cases.dart';
 
 part 'auth_event.dart';
 
 part 'auth_state.dart';
 
 class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
-
+  final UpdateUserUseCase updateUserUseCase;
+  final RegisterUserUseCase registerUserUseCase;
+  final LoginUserUseCase loginUserUseCase;
+  final LogoutUseCase logoutUseCase;
+  final GetAllUserUseCase getAllUserUseCase;
+  final GetUserUseCase getUserUseCase;
+  final ForgetUseCase forgetUseCase;
+  final DeleteUseCase deleteUseCase;
 
   AuthBloc(
-      )
-      : super(AuthInitial(
-            isLoggedIn: false,
-            isSignIn: true,
-            user: ModelUser())) {
+      {required this.updateUserUseCase,
+    required  this.registerUserUseCase,
+    required  this.loginUserUseCase,
+    required  this.logoutUseCase,
+    required  this.getAllUserUseCase,
+    required  this.getUserUseCase,
+    required  this.forgetUseCase,
+    required  this.deleteUseCase})
+      : super(
+            AuthInitial(isLoggedIn: false, isSignIn: true, user: ModelUser())) {
     on<AuthEvent>((event, emit) {
       // TODO: implement event handler
-    });
-    on<AuthInitEvent>((event, emit) async {
-
     });
     on<ToggleView>((event, emit) {
       bool toggle = !event.isSignIn;
@@ -30,21 +41,27 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
           isLoggedIn: state.isLoggedIn, isSignIn: toggle, user: state.user));
     });
 
-    on<LoginRequested>((event, emit) async {
+    on<AuthInitEvent>((event, emit) async {
+      if (Supabase.instance.client.auth.currentUser != null) {
+        var results = await getUserUseCase(
+            Params(Supabase.instance.client.auth.currentUser!.id));
 
+        results.fold((failure) => EasyLoading.showError('Something went wrong'),
+            (value) {
+          if (value != null) {
+            add(AuthStatusEvent(isLoggedIn: true, user: value));
+          } else {
+            EasyLoading.showError('Something went wrong');
+          }
+        });
+      }
+      EasyLoading.dismiss();
     });
-    on<SignOutRequested>((event, emit) async {
-
-    });
-    on<DeleteRequested>((event, emit) async {
-
-    });
-    on<SignUpRequested>((event, emit) async {
-
-    });
-    on<UpdateUser>((event, emit) async {
-
-    });
+    on<LoginRequested>((event, emit) async {});
+    on<SignOutRequested>((event, emit) async {});
+    on<DeleteRequested>((event, emit) async {});
+    on<SignUpRequested>((event, emit) async {});
+    on<UpdateUser>((event, emit) async {});
     on<AuthStatusEvent>((event, emit) {
       emit(AuthState(
           isLoggedIn: event.isLoggedIn,

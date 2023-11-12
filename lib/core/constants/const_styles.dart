@@ -4,11 +4,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ConstStyles {
-  static var headerTextStyle = GoogleFonts.greatVibes(
+  // greyQo
+  // fleurDeLeah
+  //islandMoments
+  //sevillana
+  //sendFlowers
+  //mrBedfort
+  //jimNightshade
+  static var headerTextStyle = GoogleFonts.islandMoments(
     color: ConstColors.kMainColor1,
-    letterSpacing: 2.0,
-    fontSize: 30.sp,
-    fontWeight: FontWeight.w600,
+    letterSpacing: 5.0,
+    fontSize: 35.sp,
+    fontWeight: FontWeight.bold,
     shadows: [
       BoxShadow(
         color: Colors.grey.shade100, // Shadow color
@@ -23,11 +30,11 @@ class ConstStyles {
     ],
   );
 
-  static var mainTextStyle = GoogleFonts.greatVibes(
+  static var mainTextStyle = GoogleFonts.islandMoments(
     color: ConstColors.kTextColor,
-    letterSpacing: 2.0,
-    fontSize: 18.sp,
-    fontWeight: FontWeight.w600,
+    letterSpacing: 3.0,
+    fontSize: 23.sp,
+    fontWeight: FontWeight.bold,
     shadows: [
       BoxShadow(
         color: Colors.grey.shade100, // Shadow color

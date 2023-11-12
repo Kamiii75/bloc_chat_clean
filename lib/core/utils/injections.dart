@@ -1,6 +1,11 @@
 import 'package:get_it/get_it.dart';
+import 'package:quip_sync/features/auth/data/data_sources/auth_database_impl.dart';
+import 'package:quip_sync/features/auth/data/data_sources/auth_database_main.dart';
+import '../../features/auth/data/repositories/auth_repository_implementation.dart';
+import '../../features/auth/domain/entities/model_user.dart';
+import '../../features/auth/domain/repositories/auth_repository.dart';
+import '../../features/auth/domain/use_cases/auth_use_cases.dart';
 import 'bloc_export.dart';
-
 
 final sl = GetIt.instance;
 
@@ -8,104 +13,50 @@ Future<void> init() async {
   //! Blocs
   sl.registerLazySingleton<WelcomeBloc>(() => WelcomeBloc());
 
+  sl.registerLazySingleton<AuthBloc>(() => AuthBloc(
+      updateUserUseCase: sl(),
+      registerUserUseCase: sl(),
+      loginUserUseCase: sl(),
+      logoutUseCase: sl(),
+      getAllUserUseCase: sl(),
+      getUserUseCase: sl(),
+      forgetUseCase: sl(),
+      deleteUseCase: sl()));
 
-  sl.registerLazySingleton<AuthBloc>(() => AuthBloc());
-  //
   // //! Bloc States
-  // sl.registerLazySingleton<StylesState>(() => StylesState(
-  //     selectedPlan: ModelPlan(),
-  //     selectedStyle: ModelStyles(),
-  //     allStyles: const [],
-  //     allPlans: const [],
-  //     selectedGoal: ModelGoals(),
-  //     allGoals: const []));
-  // sl.registerLazySingleton<WorkoutState>(() => WorkoutState(
-  //     selectedExercises: const [],
-  //     allWorkout: const [],
-  //     allExercises: const [],
-  //     exeIndex: -1,
-  //     selectedExercise: ModelExercise(),
-  //     selectedWorkout: ModelWorkout()));
-  // sl.registerLazySingleton<StartWorkoutState>(() => StartWorkoutState(
-  //     selectedExercises: const [],
-  //     exeIndex: -1,
-  //     selectedExercise: ModelExercise(),
-  //     myWorkout: const [],
-  //     myExercises: const [],
-  //     selectedWorkout: ModelWorkout(),
-  //     duration: const Duration(seconds: 0),
-  //     isStart: false));
-  // sl.registerLazySingleton<AuthState>(
-  //     () => AuthState(user: ModelUser(), isSignIn: false, isLoggedIn: false));
-  // sl.registerLazySingleton<ExerciseState>(() => const ExerciseState(
-  //     allExercises: [],
-  //     chestExercises: [],
-  //     legExercises: [],
-  //     bicepsExercises: [],
-  //     tricepsExercises: [],
-  //     backExercises: [],
-  //     shoulderExercises: []));
-  //
+
+  sl.registerLazySingleton<AuthState>(
+      () => AuthState(user: ModelUser(), isSignIn: false, isLoggedIn: false));
+
   // //! USE CASES
-  // ///
-  // sl.registerLazySingleton(() => ForgetUseCase(repository: sl()));
-  // sl.registerLazySingleton(() => UpdateUserUseCase(repository: sl()));
-  // sl.registerLazySingleton(() => RegisterUserUseCase(repository: sl()));
-  // sl.registerLazySingleton(() => LoginUserUseCase(repository: sl()));
-  // sl.registerLazySingleton(() => LogoutUseCase(repository: sl()));
-  // sl.registerLazySingleton(() => GetUserUseCase(repository: sl()));
-  // sl.registerLazySingleton(() => GetAllUserUseCase(repository: sl()));
-  // sl.registerLazySingleton(() => DeleteUseCase(repository: sl()));
-  //
-  // ///
-  // sl.registerLazySingleton(() => GetAllStylesUseCase(repository: sl()));
-  // sl.registerLazySingleton(() => GetAllPlansUseCase(repository: sl()));
-  // sl.registerLazySingleton(() => GetAllGoalsUseCase(repository: sl()));
-  //
-  // ///
-  // sl.registerLazySingleton(() => GetAllWorkoutsUseCase(repository: sl()));
-  // sl.registerLazySingleton(() => GetAllExercisesUseCase(repository: sl()));
-  // sl.registerLazySingleton(() => GetMyWorkoutsUseCase(repository: sl()));
-  // sl.registerLazySingleton(() => GetMyExercisesUseCase(repository: sl()));
-  //
+
+  sl.registerLazySingleton(() => ForgetUseCase(repository: sl()));
+  sl.registerLazySingleton(() => UpdateUserUseCase(repository: sl()));
+  sl.registerLazySingleton(() => RegisterUserUseCase(repository: sl()));
+  sl.registerLazySingleton(() => LoginUserUseCase(repository: sl()));
+  sl.registerLazySingleton(() => LogoutUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetUserUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetAllUserUseCase(repository: sl()));
+  sl.registerLazySingleton(() => DeleteUseCase(repository: sl()));
+
   // //! REPOSITORIES
-  // sl.registerLazySingleton<AuthRepository>(
-  //   () => AuthRepositoryImpl(remoteDatabase: sl()),
-  // );
-  // sl.registerLazySingleton<SettingsRepository>(
-  //   () => SettingsRepositoryImpl(remoteDatabase: sl()),
-  // );
-  // sl.registerLazySingleton<WorkoutRepository>(
-  //   () => WorkoutRepositoryImpl(remoteDatabase: sl()),
-  // );
-  //
+  sl.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(remoteDatabase: sl()),
+  );
+
   // //! DATA SOURCES
-  // sl.registerLazySingleton<MainDatabase>(
-  //   () => DatabaseImpl(),
-  // );
-  // sl.registerLazySingleton<SettingsDatabase>(
-  //   () => DatabaseSettingsImpl(),
-  // );
-  // sl.registerLazySingleton<WorkoutDatabase>(
-  //   () => DatabaseWorkoutImpl(),
-  // );
-  // sl.registerLazySingleton<MainAuth>(
-  //   () => AuthImpl(),
-  // );
-  //
+
+  sl.registerLazySingleton<AuthDatabaseMain>(
+    () => AuthDatabaseImpl(),
+  );
+
   // //! CORE
-  //
+
   // //! EXTERNAL
-  // // sl.registerLazySingleton(() => Dio());
-  // // final sharedPref = await SharedPreferences.getInstance();
-  // // sl.registerLazySingleton(() => sharedPref);
-  //
+
   // //! Initial Functions
 
   sl<WelcomeBloc>().add(WelcomeInitEvent());
-  // sl<StylesBloc>().add(GetAllStyles());
+
   sl<AuthBloc>().add(AuthInitEvent());
-  // sl<WorkoutBloc>().add(GetAllWorkout());
-  // sl<WorkoutBloc>().add(GetAllExercises());
-  // sl<ExerciseBloc>().add(GetAllExercisesForType());
 }
