@@ -6,6 +6,7 @@ import '../../../../../core/utils/bloc_export.dart';
 import '../../../../../core/utils/use_case.dart';
 import '../../../domain/entities/model_user.dart';
 import '../../../domain/use_cases/auth_use_cases.dart';
+import '../../widgets/components.dart';
 
 part 'auth_event.dart';
 
@@ -57,10 +58,47 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
       }
       EasyLoading.dismiss();
     });
-    on<LoginRequested>((event, emit) async {});
+    on<LoginRequested>((event, emit) async {
+
+      EasyLoading.show(status: 'Signing In...');
+      ModelUser user = ModelUser(email: event.email, password: event.password);
+      var results = await loginUserUseCase(Params(user));
+
+      results.fold((failure) => EasyLoading.showError('Something went wrong'),
+              (value) {
+            if (value != null) {
+              add(AuthStatusEvent(isLoggedIn: true, user: value));
+              EasyLoading.showSuccess('SignIn Success!');
+            } else {
+
+              EasyLoading.showError('Something went wrong');
+            }
+          });
+      EasyLoading.dismiss();
+    });
     on<SignOutRequested>((event, emit) async {});
     on<DeleteRequested>((event, emit) async {});
-    on<SignUpRequested>((event, emit) async {});
+    on<SignUpRequested>((event, emit) async {
+      EasyLoading.show(status: 'Signing Up...');
+      var results = await registerUserUseCase(Params(event.user));
+
+      results.fold((failure) => EasyLoading.showError('Something went wrong'),
+              (value) {
+            if (value !=null) {
+              add(AuthStatusEvent(isLoggedIn: true, user: value!));
+
+              signUpNameController.clear();
+              signUpPasswordController.clear();
+              signUpEmailController.clear();
+              EasyLoading.showSuccess('SignUp Success!');
+            } else {
+              EasyLoading.showError('Something went wrong');
+              // CustomSnakeBars.snakeBanner(
+              //     context, 'Failed', 'This Email is already register. Please try another one', 'failure');
+            }
+          });
+
+      EasyLoading.dismiss();});
     on<UpdateUser>((event, emit) async {});
     on<AuthStatusEvent>((event, emit) {
       emit(AuthState(

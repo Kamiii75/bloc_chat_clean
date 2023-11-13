@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quip_sync/core/constants/const_styles.dart';
 import 'package:quip_sync/core/widgets/default_buttons.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:quip_sync/features/auth/presentation/widgets/components.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../core/utils/bloc_export.dart';
 import '../../../../core/utils/injections.dart';
@@ -15,6 +15,7 @@ class SignInScreen extends StatelessWidget {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         return Form(
+          key: signInFormKey,
           autovalidateMode: AutovalidateMode.always,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,7 +48,7 @@ class SignInScreen extends StatelessWidget {
                   ),
                   DefaultTextField(
                     hnt: 'Email',
-                    controller: TextEditingController(),
+                    controller: signInEmailController,
                     icon: Icons.alternate_email,
                     keyboardType: TextInputType.emailAddress,
                   ),
@@ -56,7 +57,7 @@ class SignInScreen extends StatelessWidget {
                   ),
                   DefaultTextField(
                     keyboardType: TextInputType.visiblePassword,
-                    controller: TextEditingController(),
+                    controller: signInPasswordController,
                     hnt: "Password",
                     obscureText: true,
                     icon: Icons.security,
@@ -64,8 +65,8 @@ class SignInScreen extends StatelessWidget {
                   SizedBox(
                     height: 3.h,
                   ),
-                  DefaultButton(
-                    onPressed: () {},
+                  const DefaultButton(
+                    onPressed: signInFunc,
                     txt: 'Login',
                   ),
                 ],

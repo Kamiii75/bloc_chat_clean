@@ -30,10 +30,10 @@ class ConstStyles {
     ],
   );
 
-  static var mainTextStyle = GoogleFonts.islandMoments(
+  static var mainTextStyle = GoogleFonts.jimNightshade(
     color: ConstColors.kTextColor,
     letterSpacing: 3.0,
-    fontSize: 23.sp,
+    fontSize: 20.sp,
     fontWeight: FontWeight.bold,
     shadows: [
       BoxShadow(

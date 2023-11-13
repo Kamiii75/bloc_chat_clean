@@ -1,18 +1,13 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:quip_sync/core/constants/const_colors.dart';
 import 'package:quip_sync/core/constants/const_styles.dart';
+import 'package:quip_sync/features/auth/presentation/widgets/components.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import '../../../../core/utils/bloc_export.dart';
 import '../../../../core/utils/injections.dart';
 import '../../../../core/widgets/default_buttons.dart';
 import '../../../../core/widgets/default_text_field.dart';
 
-
-
-class SignUpScreen extends StatelessWidget  {
+class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
@@ -20,7 +15,7 @@ class SignUpScreen extends StatelessWidget  {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         return Form(
-          // key: _formKey,
+          key: signUpFormKey,
           autovalidateMode: AutovalidateMode.always,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,7 +48,7 @@ class SignUpScreen extends StatelessWidget  {
                   ),
                   DefaultTextField(
                     hnt: 'Name',
-                    controller: TextEditingController(),
+                    controller: signUpNameController,
                     icon: Icons.person,
                     keyboardType: TextInputType.name,
                   ),
@@ -62,7 +57,7 @@ class SignUpScreen extends StatelessWidget  {
                   ),
                   DefaultTextField(
                     hnt: 'Email',
-                    controller: TextEditingController(),
+                    controller: signUpEmailController,
                     icon: Icons.alternate_email,
                     keyboardType: TextInputType.emailAddress,
                   ),
@@ -71,7 +66,7 @@ class SignUpScreen extends StatelessWidget  {
                   ),
                   DefaultTextField(
                     keyboardType: TextInputType.visiblePassword,
-                    controller: TextEditingController(),
+                    controller: signUpPasswordController,
                     hnt: "Password",
                     obscureText: true,
                     icon: Icons.security,
@@ -80,14 +75,14 @@ class SignUpScreen extends StatelessWidget  {
                     height: 3.h,
                   ),
                   DefaultButton(
-                    onPressed: () {},
+                    onPressed: signUpFunc,
                     txt: 'Sign Up',
                   ),
-
                 ],
               ),
               Column(
-                mainAxisAlignment: MainAxisAlignment.end,children: [
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
                     child: Row(
@@ -113,11 +108,13 @@ class SignUpScreen extends StatelessWidget  {
                   SizedBox(
                     height: 3.h,
                   ),
-                ],)
+                ],
+              )
             ],
           ),
         );
       },
     );
   }
+
 }
