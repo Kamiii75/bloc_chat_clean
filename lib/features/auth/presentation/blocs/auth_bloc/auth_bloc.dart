@@ -64,7 +64,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
       ModelUser user = ModelUser(email: event.email, password: event.password);
       var results = await loginUserUseCase(Params(user));
 
-      results.fold((failure) => EasyLoading.showError('Something went wrong'),
+      results.fold((failure) => EasyLoading.showError('Something went wrong : Failure'),
               (value) {
             if (value != null) {
               add(AuthStatusEvent(isLoggedIn: true, user: value));

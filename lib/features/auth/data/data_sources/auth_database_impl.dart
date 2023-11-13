@@ -35,9 +35,10 @@ class AuthDatabaseImpl implements AuthDatabaseMain {
   }
 
   @override
-  Future<ModelUser?> loginWithEmailPassword(String email, String pass) {
-    // TODO: implement loginWithEmailPassword
-    throw UnimplementedError();
+  Future<ModelUser?> loginWithEmailPassword(String email, String pass) async {
+    await supabase.auth.signInWithPassword(email:email,password: pass);
+    ModelUser user=ModelUser(email: email,password: pass);
+    return user;
   }
 
   @override
