@@ -52,7 +52,7 @@ class WelcomeBloc extends HydratedBloc<WelcomeEvent, WelcomeState> {
 
   void startTimer(WelcomeState state) {
     _timer?.cancel();
-    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
       add(WelcomeChangeStepEvent(steps: state.steps));
     });
   }

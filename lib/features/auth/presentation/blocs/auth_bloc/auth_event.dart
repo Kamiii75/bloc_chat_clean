@@ -22,6 +22,10 @@ class SignOutRequested extends AuthEvent {
   final BuildContext context;
 
   const SignOutRequested({required this.context});
+}class SigninGoogleRequested extends AuthEvent {
+  final BuildContext context;
+
+  const SigninGoogleRequested({required this.context});
 }
 
 class DeleteRequested extends AuthEvent {

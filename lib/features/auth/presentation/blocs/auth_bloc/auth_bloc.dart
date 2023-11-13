@@ -6,6 +6,7 @@ import '../../../../../core/utils/bloc_export.dart';
 import '../../../../../core/utils/use_case.dart';
 import '../../../domain/entities/model_user.dart';
 import '../../../domain/use_cases/auth_use_cases.dart';
+import '../../../domain/use_cases/signin_google_user_use_case.dart';
 import '../../widgets/components.dart';
 
 part 'auth_event.dart';
@@ -14,6 +15,7 @@ part 'auth_state.dart';
 
 class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
   final UpdateUserUseCase updateUserUseCase;
+  final SigninGoogleUserUseCase signinGoogleUserUseCase;
   final RegisterUserUseCase registerUserUseCase;
   final LoginUserUseCase loginUserUseCase;
   final LogoutUseCase logoutUseCase;
@@ -25,6 +27,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
   AuthBloc(
       {required this.updateUserUseCase,
     required  this.registerUserUseCase,
+    required  this.signinGoogleUserUseCase,
     required  this.loginUserUseCase,
     required  this.logoutUseCase,
     required  this.getAllUserUseCase,
@@ -68,6 +71,23 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
               (value) {
             if (value != null) {
               add(AuthStatusEvent(isLoggedIn: true, user: value));
+              EasyLoading.showSuccess('SignIn Success!');
+            } else {
+
+              EasyLoading.showError('Something went wrong');
+            }
+          });
+      EasyLoading.dismiss();
+    });
+    on<SigninGoogleRequested>((event, emit) async {
+
+      EasyLoading.show(status: 'Signing In Google...');
+      var results = await signinGoogleUserUseCase(NoParams());
+
+      results.fold((failure) => EasyLoading.showError('Something went wrong : Failure'),
+              (value) {
+            if (value != null) {
+              add(AuthStatusEvent(isLoggedIn: true, user: state.user));
               EasyLoading.showSuccess('SignIn Success!');
             } else {
 

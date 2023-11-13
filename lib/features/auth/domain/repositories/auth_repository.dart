@@ -10,6 +10,7 @@ abstract class AuthRepository{
   Future<Either<Failure,ModelUser>> updateUser(ModelUser user);
   Future<Either<Failure,ModelUser?>> loginUser(ModelUser user);
   Future<Either<Failure,bool>> logout();
+  Future<Either<Failure,bool>> signInWithGoogle();
   Future<Either<Failure,bool>> deleteUser();
   Future<Either<Failure,bool>> forgetPass(String email);
   Future<Either<Failure,ModelUser?>> getUser(String uid);

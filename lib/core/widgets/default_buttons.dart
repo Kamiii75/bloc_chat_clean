@@ -109,37 +109,38 @@ class _DefaultButtonState extends State<DefaultButton> {
         child:  Container(
 
           margin: EdgeInsets.all(15.sp),
-          height: 5.h,
-          width: 60.w,
+          height: 6.h,
+          width: 80.w,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.sp),
-            color: ConstColors.kWidgetBGColor,
-            gradient:  LinearGradient(
+            color: ConstColors.kTextSecColor,
+            gradient:  const LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: <Color>[
-                ConstColors.kTextSecColor.withOpacity(.5),
-                ConstColors.kWidgetBGColor.withOpacity(.5),
+                ConstColors.kTextSecColor,
+                ConstColors.kWidgetBGColor,
               ],
-              stops: const[
+              stops: [
                 0,
                 0.75, //was 1 but set to 0.75 to be less dark
               ],
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.shade500, // Shadow color
+                color: ConstColors.kMainColor1, // Shadow color
                 offset:
-                    const Offset(4.0, 4.0),
-                blurRadius: 8.0,
-                spreadRadius: 2.0,
+                     Offset(5.sp, 5.sp),
+                blurRadius: 15.sp,
+                spreadRadius: 5.sp,
+              ), BoxShadow(
+                color: ConstColors.kMainColor2, // Shadow color
+                offset:
+                     Offset(-5.sp, -5.sp),
+                blurRadius: 15.sp,
+                spreadRadius: 5.sp,
               ),
-              const    BoxShadow(
-                color: Colors.white, // Highlight color
-                offset:   Offset(-4.0, -4.0),
-                blurRadius: 8.0,
-                spreadRadius: 2.0,
-              ),
+
             ],
           ),
           child: Center(
@@ -147,8 +148,8 @@ class _DefaultButtonState extends State<DefaultButton> {
               widget.txt,
               style: ConstStyles.mainTextStyle.copyWith(
                 letterSpacing: 5.0,
-                  color: ConstColors.kPrimaryColor,
-                  fontWeight: FontWeight.bold,fontSize: (ConstStyles.mainTextStyle.fontSize! + 3.sp)),
+                  color: ConstColors.kMainColor3,
+                  fontWeight: FontWeight.bold,fontSize: (ConstStyles.mainTextStyle.fontSize! + 10.sp)),
             ),
           ),
         )

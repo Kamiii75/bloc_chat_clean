@@ -6,7 +6,7 @@ class ConstColors{
   // static const Color kTextColor=Color(0xffc8c9cd);
   static const Color kTextColor=kMainColor3;
   static const Color kTextSecColor=Color(0xff282828);
-  static const Color kWidgetBGColor=Color(0xff565555);
+  static const Color kWidgetBGColor=Color(0xFF7A7A7A);
   static const Color kMainColor1=Color(0xffE99766);
   static const Color kMainColor2=Color(0xff8BC998);
   static const Color kMainColor3=Color(0xff6CBFE4);

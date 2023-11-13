@@ -15,6 +15,7 @@ class AuthPage extends StatelessWidget {
       listener: (context, state) {
         if (state.isLoggedIn) {
           context.go("/home");
+
         }
       },
       child: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {

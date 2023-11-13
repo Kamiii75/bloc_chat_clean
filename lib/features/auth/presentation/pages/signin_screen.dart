@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quip_sync/core/constants/const_colors.dart';
 import 'package:quip_sync/core/constants/const_styles.dart';
 import 'package:quip_sync/core/widgets/default_buttons.dart';
 import 'package:quip_sync/features/auth/presentation/widgets/components.dart';
@@ -69,6 +71,48 @@ class SignInScreen extends StatelessWidget {
                     onPressed: signInFunc,
                     txt: 'Login',
                   ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  Center(
+                    child: SizedBox(
+                      width: 75.w,
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Divider(
+                            color: ConstColors.kMainColor1,
+                            thickness: 5.sp,
+                          )),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15.sp),
+                            child: Text(
+                              'OR',
+                              style: ConstStyles.headerTextStyle
+                                  .copyWith(fontSize: 20.sp),
+                            ),
+                          ),
+                          Expanded(
+                              child: Divider(
+                            color: ConstColors.kMainColor1,
+                            thickness: 5.sp,
+                          )),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  GestureDetector(
+                    onTap: () => sl<AuthBloc>()
+                        .add(SigninGoogleRequested(context: context)),
+                    child: FaIcon(
+                      FontAwesomeIcons.google,
+                      size: 30.sp,
+                      color: ConstColors.kMainColor3,
+                    ),
+                  )
                 ],
               ),
               Column(

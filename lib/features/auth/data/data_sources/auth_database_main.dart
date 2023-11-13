@@ -8,6 +8,7 @@ abstract class AuthDatabaseMain{
 
   Future<List<ModelUser>> getAllUser();
   Future<bool> logout();
+  Future<bool> signInWithGoogle();
   Future<bool> forgetPass(String email);
   Future<bool> deleteUser();
 }

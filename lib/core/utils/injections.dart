@@ -5,6 +5,7 @@ import '../../features/auth/data/repositories/auth_repository_implementation.dar
 import '../../features/auth/domain/entities/model_user.dart';
 import '../../features/auth/domain/repositories/auth_repository.dart';
 import '../../features/auth/domain/use_cases/auth_use_cases.dart';
+import '../../features/auth/domain/use_cases/signin_google_user_use_case.dart';
 import 'bloc_export.dart';
 
 final sl = GetIt.instance;
@@ -21,7 +22,7 @@ Future<void> init() async {
       getAllUserUseCase: sl(),
       getUserUseCase: sl(),
       forgetUseCase: sl(),
-      deleteUseCase: sl()));
+      deleteUseCase: sl(), signinGoogleUserUseCase: sl()));
 
   // //! Bloc States
 
@@ -30,6 +31,7 @@ Future<void> init() async {
 
   // //! USE CASES
 
+  sl.registerLazySingleton(() => SigninGoogleUserUseCase(repository: sl()));
   sl.registerLazySingleton(() => ForgetUseCase(repository: sl()));
   sl.registerLazySingleton(() => UpdateUserUseCase(repository: sl()));
   sl.registerLazySingleton(() => RegisterUserUseCase(repository: sl()));
